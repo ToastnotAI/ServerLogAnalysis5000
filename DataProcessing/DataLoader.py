@@ -18,14 +18,14 @@ class DataContainer:
     raw = None #raw data is in form //ip -- [DD/MON/YYYY:HH:MM:SS +ZZZZ] "REQUEST" STATUS SIZE "REFERRER" "USER_AGENT"//
     processed = None #processed data is in a dataframe with columns: IP, DateTime, Request, Status, Size, Referrer, User_Agent
     regex_patterns = {
-        "ip": r'(^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})',
-        "datetime": r'([(.*?)])',
+        "ip": r'^(\d{1,3}(?:\.\d{1,3}){3}) ',
+        "datetime": r'\[(.*?)\]',
         "request_type": r'"(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)"',
-        "request": r'" GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH (.*? HTTP/[\d.]+")',
+        "request": r'"(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"',
         "status": r'" (\d{3}) ',
         "size": r' (\d+|-) "',
-        "referrer": r'" (http[s]?://.*?) "',
-        "user_agent": r'" "([^"]+)"$'
+        "referrer": r'" (https?://\S+|-) "',
+        "user_agent": r'"([^"]+)"$'
         }
 
 
@@ -40,23 +40,21 @@ class DataContainer:
             logger.error("File not found at location: %s", file_location)
             raise FileNotFoundError(f"The file at {file_location} was not found.")
         
-        self.raw = pd.read_csv(file_location, header=None, names=['log_entry'])
+        self.raw = pd.read_table(file_location, header=None, names=['log_entry'], dtype=str)
         if len(self.raw) == 0:
             logger.error("Loaded data is empty from file: %s", file_location)
             raise ValueError("The loaded data is empty.")
 
         logger.debug("Raw data loaded with %d entries", len(self.raw))
+        logger.debug(self.raw.iloc[0])
 
     def process_data(self):
         """Processes the raw log data into a structured DataFrame."""
         logger.debug("Processing raw data into structured format with regex")
         self.processed = pd.DataFrame()
-        for key, pattern in self.regex_patterns.items():
-            self.processed[key] = self.raw['log_entry'].str.extract(pattern, expand=False)
-            logger.debug("Extracted %s data", key)
-        logger.info("Data processing complete with %d entries", len(self.processed))
-        
-        
+        for column, pattern in self.regex_patterns.items():
+            self.processed[column] = self.raw['log_entry'].str.extract(pattern, expand=False)
+
         
 if __name__ == "__main__":
     logger.setLevel(logging.DEBUG)# Set logging level to DEBUG for detailed output
@@ -71,3 +69,4 @@ if __name__ == "__main__":
     interpreter.process_data()
     logger.debug("DataContainer initialized and data processed successfully")
     logger.debug(interpreter.processed.head())
+    logger.debug(interpreter.processed.iloc[0]['ip'])
