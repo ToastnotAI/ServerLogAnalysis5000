@@ -22,7 +22,7 @@ class DataContainer:
     regex_patterns = {
         "ip": r'^(\d{1,3}(?:\.\d{1,3}){3}) ',
         "datetime": r'\[(.*?)\]',
-        "request_type": r'"(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)"',
+        "request_type": r'"(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s',
         "request": r'"(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"',
         "status": r'" (\d{3}) ',
         "size": r' (\d+|-) "',
@@ -61,6 +61,9 @@ class DataContainer:
             logger.debug("Sample extracted value: %s", self.processed[column].iloc[0] if len(self.processed[column]) > 0 else "None")
 
         logger.info("Data processing complete with %d entries", len(self.processed))
+        logger.debug("Processed dataframe shape: %s", self.processed.shape)
+        logger.debug("Processed dataframe columns: %s", self.processed.columns.tolist())
+        logger.debug("First few rows of processed data:\n%s", self.processed.head())
 
 
         
@@ -80,5 +83,3 @@ if __name__ == "__main__":
     logger.debug("DataContainer instance created")
     interpreter.process_data()
     logger.debug("DataContainer initialized and data processed successfully")
-    logger.debug(interpreter.processed.head())
-    logger.debug(interpreter.processed.iloc[0]['ip'])
