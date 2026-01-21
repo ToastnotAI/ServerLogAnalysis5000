@@ -29,8 +29,10 @@ logger.debug("DataContainer instance created in DataExplorer")
 data_container.process_data()
 logger.info("Data processed in DataExplorer")
 
-# get all unique values in all columns
+# get all unique values in all columns and count occurences
 for column in data_container.processed.columns:
+    value_counts = data_container.processed[column].value_counts()
+    logger.info("Top 5 most common values in column '%s':\n%s", column, value_counts.head(5))
     unique_values = data_container.processed[column].unique()
     logger.info("Column '%s' has %d unique values", column, len(unique_values))
     if len(unique_values) <= 10:
@@ -38,7 +40,3 @@ for column in data_container.processed.columns:
     else:
         logger.debug("First 10 unique values in column '%s': %s", column, unique_values[:10])
     
-#count occurences of each unique value and log top 5 from each column
-for column in data_container.processed.columns:
-    value_counts = data_container.processed[column].value_counts()
-    logger.info("Top 5 most common values in column '%s':\n%s", column, value_counts.head(5))
