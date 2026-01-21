@@ -105,6 +105,23 @@ class DataContainer:
             if referrer and ('singsurf.org' in referrer):  # Replace 'yourdomain.com' with actual domain
                 self.processed.at[index, 'referrer'] = 'self'
 
+    def group_refferer_domain(self):
+        """Groups referrer URLs by their domain names."""
+        if 'referrer' not in self.processed.columns:
+            logger.error("Column 'referrer' not found in processed data")
+            raise ValueError("Column 'referrer' not found in processed data.")
+        
+        def extract_domain(url):
+            if pd.isna(url) or url == '-':
+                return url
+            match = re.search(r'://(www\.)?([^/]+)', url)
+            if match:
+                return match.group(2)
+            return url
+        
+        self.processed['referrer'] = self.processed['referrer'].apply(extract_domain)
+
+        
     def save_processed(self, output_file):
         """Saves the processed data to a CSV file.
         Args:
@@ -133,6 +150,7 @@ if __name__ == "__main__":
     logger.debug("DataContainer instance created")
     interpreter.process_data()
     interpreter.group_self_referrer()
+    interpreter.group_refferer_domain()
     logger.debug("DataContainer initialized and data processed successfully")
     output_dir = os.path.join(current_dir, '..', 'AccessLogs', 'Processed')
     os.makedirs(output_dir, exist_ok=True)

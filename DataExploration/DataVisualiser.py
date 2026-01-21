@@ -53,6 +53,9 @@ class Visualiser:
         small_categories = value_counts[value_counts < threshold].index
         logger.debug("Grouping small categories: %s", small_categories.tolist())
         return series.apply(lambda x: 'Other' if x in small_categories else x)
+    
+    def group_smaller(self, series, threshold=0.005):
+        return self.group_small(series, threshold)
 
     def apply_modifiers(self, column, modifiers):
         """Applies modifiers to the data for visualisation.
@@ -65,8 +68,12 @@ class Visualiser:
         for modifier in modifiers:
             if modifier == "ignore_largest":
                 modified_data[column] = self.ignore_largest(modified_data[column])
+            elif modifier == "ignore_largest_2":
+                modified_data[column] = self.ignore_largest(self.ignore_largest(modified_data[column]))
             elif modifier == "group_small":
                 modified_data[column] = self.group_small(modified_data[column])
+            elif modifier == "group_smaller":
+                modified_data[column] = self.group_smaller(modified_data[column])
             else:
                 logger.warning("Unknown modifier: %s", modifier)
         return modified_data[column]
@@ -181,7 +188,7 @@ if __name__ == "__main__":
         visualiser.loop_over_columns()
 
     def bar_chart_main():
-        columns_to_visualise = ['referrer', 'user_agent', 'ip']
+        columns_to_visualise = [['referrer', 'ignore_largest_2'], ['user_agent','group_small'], ['ip','group_small']]
         visualiser = BarChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
@@ -202,5 +209,5 @@ if __name__ == "__main__":
     data_container.process_data()
     logger.info("Data processed in DataVisualiser")
 
-    pie_chart_main()
- 
+    #pie_chart_main()
+    bar_chart_main()

@@ -1,8 +1,8 @@
-2026-01-21 16:35:03,463 - DEBUG - Starting DataExplorer module as main program
-2026-01-21 16:35:03,463 - DEBUG - DataLoader imported successfully
-2026-01-21 16:35:03,464 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
-2026-01-21 16:35:03,479 - DEBUG - Already Processed data loaded from CSV with 1989 entries
-2026-01-21 16:35:03,479 - DEBUG - ip                                                114.119.128.158
+2026-01-21 16:41:03,134 - DEBUG - Starting DataExplorer module as main program
+2026-01-21 16:41:03,135 - DEBUG - DataLoader imported successfully
+2026-01-21 16:41:03,135 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-21 16:41:03,140 - DEBUG - Already Processed data loaded from CSV with 1989 entries
+2026-01-21 16:41:03,140 - DEBUG - ip                                                114.119.128.158
 datetime                               06/Aug/2024:00:00:15 +0000
 request_type                                                  GET
 request                               /pfaf/BlagdonWilderness.php
@@ -11,10 +11,10 @@ size                                                         9473
 referrer                                                     self
 user_agent      Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/...
 Name: 0, dtype: object
-2026-01-21 16:35:03,479 - DEBUG - DataContainer instance created in DataExplorer
-2026-01-21 16:35:03,479 - INFO - Data already processed, skipping processing step
-2026-01-21 16:35:03,479 - INFO - Data processed in DataExplorer
-2026-01-21 16:35:03,480 - INFO - Top 5 most common values in column 'ip':
+2026-01-21 16:41:03,141 - DEBUG - DataContainer instance created in DataExplorer
+2026-01-21 16:41:03,141 - INFO - Data already processed, skipping processing step
+2026-01-21 16:41:03,141 - INFO - Data processed in DataExplorer
+2026-01-21 16:41:03,141 - INFO - Top 5 most common values in column 'ip':
 ip
 93.95.228.246     608
 157.230.40.158    256
@@ -22,11 +22,11 @@ ip
 94.233.18.217     106
 52.169.180.62     104
 Name: count, dtype: int64
-2026-01-21 16:35:03,480 - INFO - Column 'ip' has 291 unique values
-2026-01-21 16:35:03,481 - DEBUG - First 10 unique values in column 'ip': ['114.119.128.158' '207.46.13.125' '93.95.228.246' '65.21.161.160'
+2026-01-21 16:41:03,142 - INFO - Column 'ip' has 291 unique values
+2026-01-21 16:41:03,142 - DEBUG - First 10 unique values in column 'ip': ['114.119.128.158' '207.46.13.125' '93.95.228.246' '65.21.161.160'
  '156.59.198.135' '17.246.23.76' '212.192.24.218' '207.46.13.116'
  '66.249.66.19' '66.249.66.17']
-2026-01-21 16:35:03,481 - INFO - Top 5 most common values in column 'datetime':
+2026-01-21 16:41:03,143 - INFO - Top 5 most common values in column 'datetime':
 datetime
 06/Aug/2024:05:11:02 +0000    96
 06/Aug/2024:02:11:53 +0000    73
@@ -34,21 +34,21 @@ datetime
 06/Aug/2024:09:31:37 +0000    27
 06/Aug/2024:09:31:41 +0000    26
 Name: count, dtype: int64
-2026-01-21 16:35:03,482 - INFO - Column 'datetime' has 1387 unique values
-2026-01-21 16:35:03,482 - DEBUG - First 10 unique values in column 'datetime': ['06/Aug/2024:00:00:15 +0000' '06/Aug/2024:00:00:31 +0000'
+2026-01-21 16:41:03,144 - INFO - Column 'datetime' has 1387 unique values
+2026-01-21 16:41:03,144 - DEBUG - First 10 unique values in column 'datetime': ['06/Aug/2024:00:00:15 +0000' '06/Aug/2024:00:00:31 +0000'
  '06/Aug/2024:00:00:36 +0000' '06/Aug/2024:00:01:36 +0000'
  '06/Aug/2024:00:02:36 +0000' '06/Aug/2024:00:03:36 +0000'
  '06/Aug/2024:00:03:45 +0000' '06/Aug/2024:00:03:54 +0000'
  '06/Aug/2024:00:04:36 +0000' '06/Aug/2024:00:05:26 +0000']
-2026-01-21 16:35:03,482 - INFO - Top 5 most common values in column 'request_type':
+2026-01-21 16:41:03,144 - INFO - Top 5 most common values in column 'request_type':
 request_type
 GET     1983
 POST       5
 HEAD       1
 Name: count, dtype: int64
-2026-01-21 16:35:03,483 - INFO - Column 'request_type' has 3 unique values
-2026-01-21 16:35:03,483 - DEBUG - Unique values in column 'request_type': ['GET' 'POST' 'HEAD']
-2026-01-21 16:35:03,483 - INFO - Top 5 most common values in column 'request':
+2026-01-21 16:41:03,144 - INFO - Column 'request_type' has 3 unique values
+2026-01-21 16:41:03,145 - DEBUG - Unique values in column 'request_type': ['GET' 'POST' 'HEAD']
+2026-01-21 16:41:03,145 - INFO - Top 5 most common values in column 'request':
 request
 /                           661
 /robots.txt                 105
@@ -56,14 +56,14 @@ request
 /things/fourbar.php          13
 /wallpaper/wallpaper.php     13
 Name: count, dtype: int64
-2026-01-21 16:35:03,484 - INFO - Column 'request' has 805 unique values
-2026-01-21 16:35:03,484 - DEBUG - First 10 unique values in column 'request': ['/pfaf/BlagdonWilderness.php'
+2026-01-21 16:41:03,146 - INFO - Column 'request' has 805 unique values
+2026-01-21 16:41:03,146 - DEBUG - First 10 unique values in column 'request': ['/pfaf/BlagdonWilderness.php'
  '/wallpaper/wallpaper.php?FILENAME=06-14-12(184120).png' '/'
  '/robots.txt' '/singsurf/SingSurf.html' '/parade/ADE/A3%20@@0.svg'
  '/admin/logger.php?width=1920&height=1080' '/sorites/'
  '/wallpaper/wallpaper.php?FILENAME=singlepuzzpiece+with+gold+edge.jpg'
  '/singsurf/menu/classic.html']
-2026-01-21 16:35:03,484 - INFO - Top 5 most common values in column 'status':
+2026-01-21 16:41:03,146 - INFO - Top 5 most common values in column 'status':
 status
 200    1563
 404     416
@@ -71,9 +71,9 @@ status
 302       3
 403       2
 Name: count, dtype: int64
-2026-01-21 16:35:03,485 - INFO - Column 'status' has 6 unique values
-2026-01-21 16:35:03,485 - DEBUG - Unique values in column 'status': ['200' '404' '302' '403' '304' '301']
-2026-01-21 16:35:03,485 - INFO - Top 5 most common values in column 'size':
+2026-01-21 16:41:03,147 - INFO - Column 'status' has 6 unique values
+2026-01-21 16:41:03,147 - DEBUG - Unique values in column 'status': ['200' '404' '302' '403' '304' '301']
+2026-01-21 16:41:03,148 - INFO - Top 5 most common values in column 'size':
 size
 20855    302
 20854    154
@@ -81,9 +81,9 @@ size
 2908      50
 5655      25
 Name: count, dtype: int64
-2026-01-21 16:35:03,486 - INFO - Column 'size' has 775 unique values
-2026-01-21 16:35:03,486 - DEBUG - First 10 unique values in column 'size': ['9473' '8383' '20856' '20855' '3634' '572' '4239' '6634' '5757' '3597']
-2026-01-21 16:35:03,486 - INFO - Top 5 most common values in column 'referrer':
+2026-01-21 16:41:03,148 - INFO - Column 'size' has 775 unique values
+2026-01-21 16:41:03,148 - DEBUG - First 10 unique values in column 'size': ['9473' '8383' '20856' '20855' '3634' '572' '4239' '6634' '5757' '3597']
+2026-01-21 16:41:03,149 - INFO - Top 5 most common values in column 'referrer':
 referrer
 -                                  1494
 self                                461
@@ -91,14 +91,14 @@ https://www.google.com/              13
 https://phoenix.webarch4.co.uk/       5
 https://yandex.ru/                    3
 Name: count, dtype: int64
-2026-01-21 16:35:03,487 - INFO - Column 'referrer' has 17 unique values
-2026-01-21 16:35:03,487 - DEBUG - First 10 unique values in column 'referrer': ['self' '-' 'https://www.google.com/' 'https://phoenixnewlifepoetry.uk/'
+2026-01-21 16:41:03,149 - INFO - Column 'referrer' has 17 unique values
+2026-01-21 16:41:03,149 - DEBUG - First 10 unique values in column 'referrer': ['self' '-' 'https://www.google.com/' 'https://phoenixnewlifepoetry.uk/'
  'https://www.quora.com/' 'https://www.phoenixnewlifepoetry.uk/'
  'https://www.bing.com/'
  'https://m.baidu.com/?eqid=97d7d7475fb958681000000166b1a8a5'
  'https://heirhell0212r.blogspot.com/2021/11/42-match-letters-on-diagram-of-human.html'
  'https://yandex.ru/']
-2026-01-21 16:35:03,487 - INFO - Top 5 most common values in column 'user_agent':
+2026-01-21 16:41:03,150 - INFO - Top 5 most common values in column 'user_agent':
 user_agent
 check_http/v2.3.3 (monitoring-plugins 2.3.3)                                                                                     608
 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0    125
@@ -106,8 +106,8 @@ Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +http
 -                                                                                                                                106
 Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.122 Safari/537.36               106
 Name: count, dtype: int64
-2026-01-21 16:35:03,488 - INFO - Column 'user_agent' has 326 unique values
-2026-01-21 16:35:03,488 - DEBUG - First 10 unique values in column 'user_agent': ['Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)'
+2026-01-21 16:41:03,151 - INFO - Column 'user_agent' has 326 unique values
+2026-01-21 16:41:03,151 - DEBUG - First 10 unique values in column 'user_agent': ['Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)'
  'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36'
  'check_http/v2.3.3 (monitoring-plugins 2.3.3)'
  'Mozilla/5.0 (compatible; AwarioBot/1.0; +https://awario.com/bots.html)'
