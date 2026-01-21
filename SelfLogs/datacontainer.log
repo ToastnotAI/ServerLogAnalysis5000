@@ -1,0 +1,23 @@
+2026-01-21 14:10:25,305 - DEBUG - Starting DataContainer module as main program
+2026-01-21 14:10:25,305 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\apache_access.log.log
+2026-01-21 14:10:25,310 - DEBUG - Raw data loaded with 1989 entries
+2026-01-21 14:10:25,310 - DEBUG - log_entry    114.119.128.158 - - [06/Aug/2024:00:00:15 +000...
+Name: 0, dtype: object
+2026-01-21 14:10:25,311 - DEBUG - Processing raw data into structured format with regex
+2026-01-21 14:10:25,313 - DEBUG - Extracted column: ip
+2026-01-21 14:10:25,314 - DEBUG - Extracted column: datetime
+2026-01-21 14:10:25,315 - DEBUG - Extracted column: request_type
+2026-01-21 14:10:25,316 - DEBUG - Extracted column: request
+2026-01-21 14:10:25,317 - DEBUG - Extracted column: status
+2026-01-21 14:10:25,318 - DEBUG - Extracted column: size
+2026-01-21 14:10:25,318 - DEBUG - Extracted column: referrer
+2026-01-21 14:10:25,320 - DEBUG - Extracted column: user_agent
+2026-01-21 14:10:25,320 - INFO - Data processing complete with 1989 entries
+2026-01-21 14:10:25,320 - DEBUG - DataContainer initialized and data processed successfully
+2026-01-21 14:10:25,320 - DEBUG -                 ip                    datetime request_type                                            request status   size referrer                                         user_agent
+0  114.119.128.158  06/Aug/2024:00:00:15 +0000          NaN                        /pfaf/BlagdonWilderness.php    200   9473      NaN  Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/...
+1    207.46.13.125  06/Aug/2024:00:00:31 +0000          NaN  /wallpaper/wallpaper.php?FILENAME=06-14-12(184...    200   8383      NaN  Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Ge...
+2    93.95.228.246  06/Aug/2024:00:00:36 +0000          NaN                                                  /    200  20856      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+3    93.95.228.246  06/Aug/2024:00:01:36 +0000          NaN                                                  /    200  20855      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+4    93.95.228.246  06/Aug/2024:00:02:36 +0000          NaN                                                  /    200  20855      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+2026-01-21 14:10:25,325 - DEBUG - 114.119.128.158
