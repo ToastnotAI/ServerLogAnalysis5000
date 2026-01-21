@@ -11,8 +11,6 @@ if __name__ == "__main__":
     logger.debug("Starting DataExplorer module as main program")
     # the file is located in a sibling directory
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(current_dir, '..', 'AccessLogs')
-    file_location = os.path.join(data_dir, 'apache_access.log.log')
     processor_directory = os.path.join(current_dir, '..', 'DataProcessing')
     path.append(processor_directory) # Add DataProcessing directory to sys.path to allow import
     from DataLoader import DataContainer 
@@ -21,10 +19,11 @@ if __name__ == "__main__":
 
 
 else:
-    f
-    file_location = 'AnalysisSuite/AccessLogs/apache_access.log.log'
+    #import data loader assuming the program is run from parent directory
+    from DataProcessing.DataLoader import DataContainer
 
-data_container = DataContainer(file_location)
+
+data_container = DataContainer()
 logger.debug("DataContainer instance created in DataExplorer")
 data_container.process_data()
 logger.info("Data processed in DataExplorer")

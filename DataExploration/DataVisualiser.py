@@ -10,6 +10,11 @@ class Visualiser:
         columns (list): List of columns available for visualisation with modifiers.
     Methods:
         __init__(self, data, columns): Initializes the Visualiser with processed data.
+        ignore_largest(self, series): Ignores the largest category in a pandas Series.
+        group_small(self, series, threshold=0.01): Groups small categories in a pandas Series into 'Other'.
+        apply_modifiers(self, column, modifiers): Applies modifiers to the data for visualisation.
+        plot_column(self, column, modifiers=[]): Placeholder method for plotting a column.
+        loop_over_columns(self): Loops over available columns to create visualisations.
     """
     data = None
     columns = []
@@ -126,26 +131,76 @@ class PieChartVisualiser(Visualiser):
         plt.show()
         logger.info("Pie chart plotted for column: %s", column)
 
+class BarChartVisualiser(Visualiser):
+    """Class to create bar chart visualisations from selected columns of processed data.
+    Attributes:
+        data (pd.DataFrame): The processed data to visualise.
+        columns (list): List of columns available for visualisation.
+    Methods:
+        __init__(self, data, columns): Initializes the BarChartVisualiser with processed data.
+        plot_column(self, column, modifiers=[]): Plots a bar chart for the specified column.
+        loop_over_columns(self): Loops over available columns to create bar charts.
+    """
+
+    def plot_column(self, column, modifiers=[]):
+        """Plots a bar chart for the specified column.
+        args:
+            column (str): The column to visualise.
+            modifiers (list): List of modifiers to adjust the bar chart (e.g., ignore_largest, group_small).
+        """
+        if column not in self.data.columns:
+            logger.error("Column '%s' not found in data", column)
+            raise ValueError(f"Column '{column}' not found in data.")
+        
+        # Apply modifiers
+        if len(modifiers) > 0:
+            modified_series = self.apply_modifiers(column, modifiers)
+            value_counts = modified_series.value_counts()
+        
+        else:
+            value_counts = self.data[column].value_counts()
+
+        plt.figure(figsize=(12, 6))
+        value_counts.plot(kind='bar')
+        plt.title(f'{column} with modifiers: {", ".join(modifiers) if modifiers else "None"}')
+        plt.xlabel(column)
+        plt.ylabel('Count')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        plt.show()
+        logger.info("Bar chart plotted for column: %s", column)
+
+
 if __name__ == "__main__":
+    from sys import path
     import os
+
+    def pie_chart_main():
+        columns_to_visualise = [['status','group_small'], ['request_type', 'ignore_largest']]
+        visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
+        visualiser.loop_over_columns()
+
+    def bar_chart_main():
+        columns_to_visualise = ['referrer', 'user_agent', 'ip']
+        visualiser = BarChartVisualiser(data_container.processed, columns_to_visualise)
+        visualiser.loop_over_columns()
+
     os.makedirs('SelfLogs/DataExplorationLogs', exist_ok=True)
     logging.basicConfig(filename='SelfLogs/DataExplorationLogs/data_visualiser.log', filemode='w', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logger.addHandler(logging.StreamHandler())# Add a stream handler to output logs to console
     logger.debug("Starting DataVisualiser module as main program")
+
     # set file location relative to this file
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(current_dir, '..', 'AccessLogs')
-    file_location = os.path.join(data_dir, 'apache_access.log.log')
     processor_directory = os.path.join(current_dir, '..', 'DataProcessing')
-    from sys import path
     path.append(processor_directory) # Add DataProcessing directory to sys.path to allow import
+
     from DataLoader import DataContainer
     logger.debug("DataLoader imported successfully")
-    data_container = DataContainer(file_location)
+    data_container = DataContainer()
     logger.debug("DataContainer instance created in DataVisualiser")
     data_container.process_data()
     logger.info("Data processed in DataVisualiser")
-    visualiser = PieChartVisualiser(data_container.processed, data_container.processed.columns.tolist())
-    columns_to_visualise = [['status','group_small'], ['request_type', 'ignore_largest']]
-    visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
-    visualiser.loop_over_columns()
+
+    pie_chart_main()
+ 
