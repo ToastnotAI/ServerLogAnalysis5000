@@ -1,66 +1,72 @@
-2026-01-21 14:33:07,956 - DEBUG - Starting DataExplorer module as main program
-2026-01-21 14:33:07,957 - DEBUG - DataLoader imported successfully
-2026-01-21 14:33:07,957 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataExploration\..\AccessLogs\apache_access.log.log
-2026-01-21 14:33:07,962 - DEBUG - Raw data loaded with 1989 entries
-2026-01-21 14:33:07,962 - DEBUG - log_entry    114.119.128.158 - - [06/Aug/2024:00:00:15 +000...
+2026-01-21 14:44:58,811 - DEBUG - Starting DataExplorer module as main program
+2026-01-21 14:44:58,812 - DEBUG - DataLoader imported successfully
+2026-01-21 14:44:58,812 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataExploration\..\AccessLogs\apache_access.log.log
+2026-01-21 14:44:58,817 - DEBUG - Raw data loaded with 1989 entries
+2026-01-21 14:44:58,817 - DEBUG - log_entry    114.119.128.158 - - [06/Aug/2024:00:00:15 +000...
 Name: 0, dtype: object
-2026-01-21 14:33:07,962 - DEBUG - DataContainer instance created in DataExplorer
-2026-01-21 14:33:07,962 - DEBUG - Processing raw data into structured format with regex
-2026-01-21 14:33:07,963 - DEBUG - Sample log entry: 114.119.128.158 - - [06/Aug/2024:00:00:15 +0000] "GET /pfaf/BlagdonWilderness.php HTTP/1.1" 200 9473 "https://singsurf.org/index.html" "Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)"
-2026-01-21 14:33:07,964 - DEBUG - Extracted column: ip with pattern: ^(\d{1,3}(?:\.\d{1,3}){3}) 
-2026-01-21 14:33:07,964 - DEBUG - Sample extracted value: 114.119.128.158
-2026-01-21 14:33:07,965 - DEBUG - Extracted column: datetime with pattern: \[(.*?)\]
-2026-01-21 14:33:07,965 - DEBUG - Sample extracted value: 06/Aug/2024:00:00:15 +0000
-2026-01-21 14:33:07,966 - DEBUG - Extracted column: request_type with pattern: "(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s
-2026-01-21 14:33:07,966 - DEBUG - Sample extracted value: GET
-2026-01-21 14:33:07,968 - DEBUG - Extracted column: request with pattern: "(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"
-2026-01-21 14:33:07,968 - DEBUG - Sample extracted value: /pfaf/BlagdonWilderness.php
-2026-01-21 14:33:07,968 - DEBUG - Extracted column: status with pattern: " (\d{3}) 
-2026-01-21 14:33:07,968 - DEBUG - Sample extracted value: 200
-2026-01-21 14:33:07,969 - DEBUG - Extracted column: size with pattern:  (\d+|-) "
-2026-01-21 14:33:07,969 - DEBUG - Sample extracted value: 9473
-2026-01-21 14:33:07,970 - DEBUG - Extracted column: referrer with pattern: " (https?://\S+|-) "
-2026-01-21 14:33:07,970 - DEBUG - Sample extracted value: nan
-2026-01-21 14:33:07,973 - DEBUG - Extracted column: user_agent with pattern: "([^"]+)"$
-2026-01-21 14:33:07,973 - DEBUG - Sample extracted value: Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)
-2026-01-21 14:33:07,973 - INFO - Data processing complete with 1989 entries
-2026-01-21 14:33:07,973 - DEBUG - Processed dataframe shape: (1989, 8)
-2026-01-21 14:33:07,973 - DEBUG - Processed dataframe columns: ['ip', 'datetime', 'request_type', 'request', 'status', 'size', 'referrer', 'user_agent']
-2026-01-21 14:33:07,973 - DEBUG - First few rows of processed data:
-                ip                    datetime request_type                                            request status   size referrer                                         user_agent
-0  114.119.128.158  06/Aug/2024:00:00:15 +0000          GET                        /pfaf/BlagdonWilderness.php    200   9473      NaN  Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/...
-1    207.46.13.125  06/Aug/2024:00:00:31 +0000          GET  /wallpaper/wallpaper.php?FILENAME=06-14-12(184...    200   8383      NaN  Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Ge...
-2    93.95.228.246  06/Aug/2024:00:00:36 +0000          GET                                                  /    200  20856      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
-3    93.95.228.246  06/Aug/2024:00:01:36 +0000          GET                                                  /    200  20855      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
-4    93.95.228.246  06/Aug/2024:00:02:36 +0000          GET                                                  /    200  20855      NaN       check_http/v2.3.3 (monitoring-plugins 2.3.3)
-2026-01-21 14:33:07,976 - INFO - Data processed in DataExplorer
-2026-01-21 14:33:07,976 - INFO - Column 'ip' has 291 unique values
-2026-01-21 14:33:07,976 - DEBUG - First 10 unique values in column 'ip': ['114.119.128.158' '207.46.13.125' '93.95.228.246' '65.21.161.160'
+2026-01-21 14:44:58,817 - DEBUG - DataContainer instance created in DataExplorer
+2026-01-21 14:44:58,818 - DEBUG - Processing raw data into structured format with regex
+2026-01-21 14:44:58,818 - DEBUG - Sample log entry: 114.119.128.158 - - [06/Aug/2024:00:00:15 +0000] "GET /pfaf/BlagdonWilderness.php HTTP/1.1" 200 9473 "https://singsurf.org/index.html" "Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)"
+2026-01-21 14:44:58,819 - DEBUG - Extracted column: ip with pattern: ^(\d{1,3}(?:\.\d{1,3}){3}) 
+2026-01-21 14:44:58,819 - DEBUG - Sample extracted value: 114.119.128.158
+2026-01-21 14:44:58,820 - DEBUG - Extracted column: datetime with pattern: \[(.*?)\]
+2026-01-21 14:44:58,820 - DEBUG - Sample extracted value: 06/Aug/2024:00:00:15 +0000
+2026-01-21 14:44:58,821 - DEBUG - Extracted column: request_type with pattern: "(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s
+2026-01-21 14:44:58,821 - DEBUG - Sample extracted value: GET
+2026-01-21 14:44:58,822 - DEBUG - Extracted column: request with pattern: "(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"
+2026-01-21 14:44:58,822 - DEBUG - Sample extracted value: /pfaf/BlagdonWilderness.php
+2026-01-21 14:44:58,823 - DEBUG - Extracted column: status with pattern: " (\d{3}) 
+2026-01-21 14:44:58,823 - DEBUG - Sample extracted value: 200
+2026-01-21 14:44:58,824 - DEBUG - Extracted column: size with pattern:  (\d+|-) "
+2026-01-21 14:44:58,824 - DEBUG - Sample extracted value: 9473
+2026-01-21 14:44:58,825 - DEBUG - Extracted column: referrer with pattern:  "([^"]+)" "
+2026-01-21 14:44:58,825 - DEBUG - Sample extracted value: https://singsurf.org/index.html
+2026-01-21 14:44:58,826 - DEBUG - Extracted column: user_agent with pattern: "([^"]+)"$
+2026-01-21 14:44:58,826 - DEBUG - Sample extracted value: Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)
+2026-01-21 14:44:58,826 - INFO - Data processing complete with 1989 entries
+2026-01-21 14:44:58,826 - DEBUG - Processed dataframe shape: (1989, 8)
+2026-01-21 14:44:58,826 - DEBUG - Processed dataframe columns: ['ip', 'datetime', 'request_type', 'request', 'status', 'size', 'referrer', 'user_agent']
+2026-01-21 14:44:58,826 - DEBUG - First few rows of processed data:
+                ip                    datetime request_type                                            request status   size                         referrer                                         user_agent
+0  114.119.128.158  06/Aug/2024:00:00:15 +0000          GET                        /pfaf/BlagdonWilderness.php    200   9473  https://singsurf.org/index.html  Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/...
+1    207.46.13.125  06/Aug/2024:00:00:31 +0000          GET  /wallpaper/wallpaper.php?FILENAME=06-14-12(184...    200   8383                                -  Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Ge...
+2    93.95.228.246  06/Aug/2024:00:00:36 +0000          GET                                                  /    200  20856                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+3    93.95.228.246  06/Aug/2024:00:01:36 +0000          GET                                                  /    200  20855                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+4    93.95.228.246  06/Aug/2024:00:02:36 +0000          GET                                                  /    200  20855                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
+2026-01-21 14:44:58,829 - INFO - Data processed in DataExplorer
+2026-01-21 14:44:58,829 - INFO - Column 'ip' has 291 unique values
+2026-01-21 14:44:58,829 - DEBUG - First 10 unique values in column 'ip': ['114.119.128.158' '207.46.13.125' '93.95.228.246' '65.21.161.160'
  '156.59.198.135' '17.246.23.76' '212.192.24.218' '207.46.13.116'
  '66.249.66.19' '66.249.66.17']
-2026-01-21 14:33:07,977 - INFO - Column 'datetime' has 1387 unique values
-2026-01-21 14:33:07,977 - DEBUG - First 10 unique values in column 'datetime': ['06/Aug/2024:00:00:15 +0000' '06/Aug/2024:00:00:31 +0000'
+2026-01-21 14:44:58,830 - INFO - Column 'datetime' has 1387 unique values
+2026-01-21 14:44:58,830 - DEBUG - First 10 unique values in column 'datetime': ['06/Aug/2024:00:00:15 +0000' '06/Aug/2024:00:00:31 +0000'
  '06/Aug/2024:00:00:36 +0000' '06/Aug/2024:00:01:36 +0000'
  '06/Aug/2024:00:02:36 +0000' '06/Aug/2024:00:03:36 +0000'
  '06/Aug/2024:00:03:45 +0000' '06/Aug/2024:00:03:54 +0000'
  '06/Aug/2024:00:04:36 +0000' '06/Aug/2024:00:05:26 +0000']
-2026-01-21 14:33:07,977 - INFO - Column 'request_type' has 3 unique values
-2026-01-21 14:33:07,977 - DEBUG - Unique values in column 'request_type': ['GET' 'POST' 'HEAD']
-2026-01-21 14:33:07,977 - INFO - Column 'request' has 805 unique values
-2026-01-21 14:33:07,978 - DEBUG - First 10 unique values in column 'request': ['/pfaf/BlagdonWilderness.php'
+2026-01-21 14:44:58,830 - INFO - Column 'request_type' has 3 unique values
+2026-01-21 14:44:58,830 - DEBUG - Unique values in column 'request_type': ['GET' 'POST' 'HEAD']
+2026-01-21 14:44:58,831 - INFO - Column 'request' has 805 unique values
+2026-01-21 14:44:58,831 - DEBUG - First 10 unique values in column 'request': ['/pfaf/BlagdonWilderness.php'
  '/wallpaper/wallpaper.php?FILENAME=06-14-12(184120).png' '/'
  '/robots.txt' '/singsurf/SingSurf.html' '/parade/ADE/A3%20@@0.svg'
  '/admin/logger.php?width=1920&height=1080' '/sorites/'
  '/wallpaper/wallpaper.php?FILENAME=singlepuzzpiece+with+gold+edge.jpg'
  '/singsurf/menu/classic.html']
-2026-01-21 14:33:07,978 - INFO - Column 'status' has 6 unique values
-2026-01-21 14:33:07,978 - DEBUG - Unique values in column 'status': ['200' '404' '302' '403' '304' '301']
-2026-01-21 14:33:07,978 - INFO - Column 'size' has 775 unique values
-2026-01-21 14:33:07,978 - DEBUG - First 10 unique values in column 'size': ['9473' '8383' '20856' '20855' '3634' '572' '4239' '6634' '5757' '3597']
-2026-01-21 14:33:07,978 - INFO - Column 'referrer' has 1 unique values
-2026-01-21 14:33:07,978 - DEBUG - Unique values in column 'referrer': [nan]
-2026-01-21 14:33:07,979 - INFO - Column 'user_agent' has 326 unique values
-2026-01-21 14:33:07,979 - DEBUG - First 10 unique values in column 'user_agent': ['Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)'
+2026-01-21 14:44:58,831 - INFO - Column 'status' has 6 unique values
+2026-01-21 14:44:58,831 - DEBUG - Unique values in column 'status': ['200' '404' '302' '403' '304' '301']
+2026-01-21 14:44:58,831 - INFO - Column 'size' has 775 unique values
+2026-01-21 14:44:58,831 - DEBUG - First 10 unique values in column 'size': ['9473' '8383' '20856' '20855' '3634' '572' '4239' '6634' '5757' '3597']
+2026-01-21 14:44:58,831 - INFO - Column 'referrer' has 73 unique values
+2026-01-21 14:44:58,831 - DEBUG - First 10 unique values in column 'referrer': ['https://singsurf.org/index.html' '-'
+ 'https://www.singsurf.org/wallpaper/wallpaper.php?FILENAME=DSCN1415cr.JPG'
+ 'https://www.google.com/' 'https://singsurf.org/things/fourbar.php'
+ 'https://phoenixnewlifepoetry.uk/'
+ 'https://singsurf.org/wallpaper/wallpaper.php'
+ 'http://www.singsurf.org/robots.txt' 'http://singsurf.org/robots.txt'
+ 'https://www.singsurf.org/wallpaper/wallpaper.php?FILENAME=c99.jpg']
+2026-01-21 14:44:58,832 - INFO - Column 'user_agent' has 326 unique values
+2026-01-21 14:44:58,832 - DEBUG - First 10 unique values in column 'user_agent': ['Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)'
  'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36'
  'check_http/v2.3.3 (monitoring-plugins 2.3.3)'
  'Mozilla/5.0 (compatible; AwarioBot/1.0; +https://awario.com/bots.html)'
@@ -70,3 +76,65 @@ Name: 0, dtype: object
  'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.182 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
  'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
  'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1']
+2026-01-21 14:44:58,832 - INFO - Top 5 most common values in column 'ip':
+ip
+93.95.228.246     608
+157.230.40.158    256
+128.210.106.81    109
+94.233.18.217     106
+52.169.180.62     104
+Name: count, dtype: int64
+2026-01-21 14:44:58,833 - INFO - Top 5 most common values in column 'datetime':
+datetime
+06/Aug/2024:05:11:02 +0000    96
+06/Aug/2024:02:11:53 +0000    73
+06/Aug/2024:02:11:54 +0000    33
+06/Aug/2024:09:31:37 +0000    27
+06/Aug/2024:09:31:41 +0000    26
+Name: count, dtype: int64
+2026-01-21 14:44:58,834 - INFO - Top 5 most common values in column 'request_type':
+request_type
+GET     1983
+POST       5
+HEAD       1
+Name: count, dtype: int64
+2026-01-21 14:44:58,835 - INFO - Top 5 most common values in column 'request':
+request
+/                           661
+/robots.txt                 105
+/brain/rightbrain.php        19
+/things/fourbar.php          13
+/wallpaper/wallpaper.php     13
+Name: count, dtype: int64
+2026-01-21 14:44:58,836 - INFO - Top 5 most common values in column 'status':
+status
+200    1563
+404     416
+304       4
+302       3
+403       2
+Name: count, dtype: int64
+2026-01-21 14:44:58,836 - INFO - Top 5 most common values in column 'size':
+size
+20855    302
+20854    154
+20856    151
+2908      50
+5655      25
+Name: count, dtype: int64
+2026-01-21 14:44:58,837 - INFO - Top 5 most common values in column 'referrer':
+referrer
+-                                          1494
+https://singsurf.org/parade/ADE.php          98
+https://www.singsurf.org/parade/ADE.php      95
+https://singsurf.org/                        48
+https://singsurf.org/stepney/                26
+Name: count, dtype: int64
+2026-01-21 14:44:58,838 - INFO - Top 5 most common values in column 'user_agent':
+user_agent
+check_http/v2.3.3 (monitoring-plugins 2.3.3)                                                                                     608
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0    125
+Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +https://openai.com/gptbot)                           119
+-                                                                                                                                106
+Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.122 Safari/537.36               106
+Name: count, dtype: int64

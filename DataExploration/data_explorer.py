@@ -38,3 +38,7 @@ for column in data_container.processed.columns:
     else:
         logger.debug("First 10 unique values in column '%s': %s", column, unique_values[:10])
     
+#count occurences of each unique value and log top 5 from each column
+for column in data_container.processed.columns:
+    value_counts = data_container.processed[column].value_counts()
+    logger.info("Top 5 most common values in column '%s':\n%s", column, value_counts.head(5))

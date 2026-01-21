@@ -26,7 +26,7 @@ class DataContainer:
         "request": r'"(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"',
         "status": r'" (\d{3}) ',
         "size": r' (\d+|-) "',
-        "referrer": r'" (https?://\S+|-) "',
+        "referrer": r' "([^"]+)" "',
         "user_agent": r'"([^"]+)"$'
         }
 
