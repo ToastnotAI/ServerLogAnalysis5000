@@ -1,40 +1,40 @@
-2026-01-21 16:46:38,213 - DEBUG - Starting DataContainer module as main program
-2026-01-21 16:46:38,213 - DEBUG - Current directory: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing
-2026-01-21 16:46:38,213 - DEBUG - Data directory: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs
-2026-01-21 16:46:38,213 - DEBUG - File location set to: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\apache_access.log.log
-2026-01-21 16:46:38,213 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\apache_access.log.log
-2026-01-21 16:46:38,218 - DEBUG - Raw data loaded with 1989 entries
-2026-01-21 16:46:38,218 - DEBUG - log_entry    114.119.128.158 - - [06/Aug/2024:00:00:15 +000...
+2026-01-22 15:30:28,470 - DEBUG - Starting DataContainer module as main program
+2026-01-22 15:30:28,470 - DEBUG - Current directory: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing
+2026-01-22 15:30:28,470 - DEBUG - Data directory: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs
+2026-01-22 15:30:28,470 - DEBUG - File location set to: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\apache_access.log.log
+2026-01-22 15:30:28,470 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\apache_access.log.log
+2026-01-22 15:30:28,478 - DEBUG - Raw data loaded with 1989 entries
+2026-01-22 15:30:28,478 - DEBUG - log_entry    114.119.128.158 - - [06/Aug/2024:00:00:15 +000...
 Name: 0, dtype: object
-2026-01-21 16:46:38,219 - DEBUG - DataContainer instance created
-2026-01-21 16:46:38,219 - DEBUG - Processing raw data into structured format with regex
-2026-01-21 16:46:38,219 - DEBUG - Sample log entry: 114.119.128.158 - - [06/Aug/2024:00:00:15 +0000] "GET /pfaf/BlagdonWilderness.php HTTP/1.1" 200 9473 "https://singsurf.org/index.html" "Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)"
-2026-01-21 16:46:38,221 - DEBUG - Extracted column: ip with pattern: ^(\d{1,3}(?:\.\d{1,3}){3}) 
-2026-01-21 16:46:38,221 - DEBUG - Sample extracted value: 114.119.128.158
-2026-01-21 16:46:38,222 - DEBUG - Extracted column: datetime with pattern: \[(.*?)\]
-2026-01-21 16:46:38,222 - DEBUG - Sample extracted value: 06/Aug/2024:00:00:15 +0000
-2026-01-21 16:46:38,223 - DEBUG - Extracted column: request_type with pattern: "(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s
-2026-01-21 16:46:38,223 - DEBUG - Sample extracted value: GET
-2026-01-21 16:46:38,224 - DEBUG - Extracted column: request with pattern: "(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"
-2026-01-21 16:46:38,224 - DEBUG - Sample extracted value: /pfaf/BlagdonWilderness.php
-2026-01-21 16:46:38,226 - DEBUG - Extracted column: status with pattern: " (\d{3}) 
-2026-01-21 16:46:38,226 - DEBUG - Sample extracted value: 200
-2026-01-21 16:46:38,227 - DEBUG - Extracted column: size with pattern:  (\d+|-) "
-2026-01-21 16:46:38,227 - DEBUG - Sample extracted value: 9473
-2026-01-21 16:46:38,228 - DEBUG - Extracted column: referrer with pattern:  "([^"]+)" "
-2026-01-21 16:46:38,229 - DEBUG - Sample extracted value: https://singsurf.org/index.html
-2026-01-21 16:46:38,230 - DEBUG - Extracted column: user_agent with pattern: "([^"]+)"$
-2026-01-21 16:46:38,230 - DEBUG - Sample extracted value: Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)
-2026-01-21 16:46:38,230 - INFO - Data processing complete with 1989 entries
-2026-01-21 16:46:38,230 - DEBUG - Processed dataframe shape: (1989, 8)
-2026-01-21 16:46:38,230 - DEBUG - Processed dataframe columns: ['ip', 'datetime', 'request_type', 'request', 'status', 'size', 'referrer', 'user_agent']
-2026-01-21 16:46:38,230 - DEBUG - First few rows of processed data:
+2026-01-22 15:30:28,479 - DEBUG - DataContainer instance created
+2026-01-22 15:30:28,479 - DEBUG - Processing raw data into structured format with regex
+2026-01-22 15:30:28,479 - DEBUG - Sample log entry: 114.119.128.158 - - [06/Aug/2024:00:00:15 +0000] "GET /pfaf/BlagdonWilderness.php HTTP/1.1" 200 9473 "https://singsurf.org/index.html" "Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)"
+2026-01-22 15:30:28,483 - DEBUG - Extracted column: ip with pattern: ^(\d{1,3}(?:\.\d{1,3}){3}) 
+2026-01-22 15:30:28,483 - DEBUG - Sample extracted value: 114.119.128.158
+2026-01-22 15:30:28,485 - DEBUG - Extracted column: datetime with pattern: \[(.*?)\]
+2026-01-22 15:30:28,486 - DEBUG - Sample extracted value: 06/Aug/2024:00:00:15 +0000
+2026-01-22 15:30:28,487 - DEBUG - Extracted column: request_type with pattern: "(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s
+2026-01-22 15:30:28,487 - DEBUG - Sample extracted value: GET
+2026-01-22 15:30:28,489 - DEBUG - Extracted column: request with pattern: "(?:GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH)\s+(.+?)\s+HTTP/[\d.]+"
+2026-01-22 15:30:28,489 - DEBUG - Sample extracted value: /pfaf/BlagdonWilderness.php
+2026-01-22 15:30:28,491 - DEBUG - Extracted column: status with pattern: " (\d{3}) 
+2026-01-22 15:30:28,491 - DEBUG - Sample extracted value: 200
+2026-01-22 15:30:28,493 - DEBUG - Extracted column: size with pattern:  (\d+|-) "
+2026-01-22 15:30:28,493 - DEBUG - Sample extracted value: 9473
+2026-01-22 15:30:28,495 - DEBUG - Extracted column: referrer with pattern:  "([^"]+)" "
+2026-01-22 15:30:28,495 - DEBUG - Sample extracted value: https://singsurf.org/index.html
+2026-01-22 15:30:28,497 - DEBUG - Extracted column: user_agent with pattern: "([^"]+)"$
+2026-01-22 15:30:28,497 - DEBUG - Sample extracted value: Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; PetalBot;+https://webmaster.petalsearch.com/site/petalbot)
+2026-01-22 15:30:28,498 - INFO - Data processing complete with 1989 entries
+2026-01-22 15:30:28,498 - DEBUG - Processed dataframe shape: (1989, 8)
+2026-01-22 15:30:28,498 - DEBUG - Processed dataframe columns: ['ip', 'datetime', 'request_type', 'request', 'status', 'size', 'referrer', 'user_agent']
+2026-01-22 15:30:28,498 - DEBUG - First few rows of processed data:
                 ip                    datetime request_type                                            request status   size                         referrer                                         user_agent
 0  114.119.128.158  06/Aug/2024:00:00:15 +0000          GET                        /pfaf/BlagdonWilderness.php    200   9473  https://singsurf.org/index.html  Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/...
 1    207.46.13.125  06/Aug/2024:00:00:31 +0000          GET  /wallpaper/wallpaper.php?FILENAME=06-14-12(184...    200   8383                                -  Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Ge...
 2    93.95.228.246  06/Aug/2024:00:00:36 +0000          GET                                                  /    200  20856                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
 3    93.95.228.246  06/Aug/2024:00:01:36 +0000          GET                                                  /    200  20855                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
 4    93.95.228.246  06/Aug/2024:00:02:36 +0000          GET                                                  /    200  20855                                -       check_http/v2.3.3 (monitoring-plugins 2.3.3)
-2026-01-21 16:46:38,256 - DEBUG - DataContainer initialized and data processed successfully
-2026-01-21 16:46:38,261 - INFO - Processed data saved to c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
-2026-01-21 16:46:38,261 - INFO - Processed data saved to c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-22 15:30:28,571 - DEBUG - DataContainer initialized and data processed successfully
+2026-01-22 15:30:28,593 - INFO - Processed data saved to c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-22 15:30:28,594 - INFO - Processed data saved to c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv

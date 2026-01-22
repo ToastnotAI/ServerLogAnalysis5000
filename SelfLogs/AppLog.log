@@ -1,0 +1,28 @@
+2026-01-22 15:50:22,584 - INFO - Application started
+2026-01-22 15:50:22,585 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-22 15:50:22,592 - INFO - Data loaded successfully
+2026-01-22 15:50:22,592 - INFO - Initializing Visualiser
+2026-01-22 15:50:22,592 - INFO - Visualising column: status
+2026-01-22 15:50:49,458 - INFO - Application started
+2026-01-22 15:50:49,458 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-22 15:50:49,473 - INFO - Data loaded successfully
+2026-01-22 15:50:49,473 - INFO - Initializing Visualiser
+2026-01-22 15:50:49,473 - INFO - Visualising column: status
+2026-01-22 15:50:50,801 - INFO - Pie chart plotted for column: status
+2026-01-22 15:50:50,801 - INFO - Visualising column: status
+2026-01-22 15:50:51,537 - INFO - Pie chart plotted for column: status
+2026-01-22 15:50:51,538 - INFO - Visualising column: request_type
+2026-01-22 15:50:52,250 - INFO - Pie chart plotted for column: request_type
+2026-01-22 15:50:52,250 - INFO - Visualising column: user_agent
+2026-01-22 15:50:53,168 - INFO - Pie chart plotted for column: user_agent
+2026-01-22 15:50:53,168 - INFO - Initializing Visualiser
+2026-01-22 15:50:53,168 - INFO - Visualising column: referrer
+2026-01-22 15:50:57,082 - INFO - Bar chart plotted for column: referrer
+2026-01-22 15:50:57,082 - INFO - Visualising column: user_agent
+2026-01-22 15:50:57,844 - INFO - Bar chart plotted for column: user_agent
+2026-01-22 15:50:57,844 - INFO - Visualising column: ip
+2026-01-22 15:50:58,575 - INFO - Bar chart plotted for column: ip
+2026-01-22 15:50:58,575 - INFO - Initializing Visualiser
+2026-01-22 15:50:58,575 - INFO - Visualising column: datetime
+2026-01-22 15:51:00,083 - INFO - Line chart plotted for column: datetime
+2026-01-22 15:51:00,083 - ERROR - Application encountered an error: name 'xs' is not defined
