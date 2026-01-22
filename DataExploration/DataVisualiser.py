@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import logging
+import re
 logger = logging.getLogger(__name__)
 
 class Visualiser:
@@ -86,6 +87,8 @@ class Visualiser:
                 except Exception as e:
                     logger.error("Error applying custom modifier: %s", e)
                     logger.warning("Skipping custom modifier due to error.")
+            elif modifier[0] == 'title':
+                pass
             else:
                 logger.warning("Unknown modifier: %s", modifier)
         return modified_data[column]
@@ -121,9 +124,9 @@ class PieChartVisualiser(Visualiser):
         plot_column(self, column, modifiers=[]): Plots a pie chart for the specified column.
         loop_over_columns(self): Loops over available columns to create pie charts.
 
-    """
-  
-    
+    """    
+
+
     def plot_column(self, column, modifiers=[]):
         """Plots a pie chart for the specified column.
         args:
@@ -135,6 +138,7 @@ class PieChartVisualiser(Visualiser):
             raise ValueError(f"Column '{column}' not found in data.")
         
         # Apply modifiers
+        title = None
         if len(modifiers) > 0:
             modified_series = self.apply_modifiers(column, modifiers)
             value_counts = modified_series.value_counts()
@@ -147,7 +151,13 @@ class PieChartVisualiser(Visualiser):
         modifiers_str = ""
         for modifier in modifiers:
             modifiers_str += f"{modifier} "
-        plt.title(f'{column} with modifiers: {modifiers_str}') if modifiers else plt.title(f'{column} with modifiers: None')
+            if modifier[0] == 'title':
+                title = modifier[1]
+        
+        if title:
+            plt.title(title)
+        else:
+            plt.title(f'{column} with modifiers: {modifiers_str}') if modifiers else plt.title(f'{column} with modifiers: None')
         plt.legend(value_counts.index, loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
         plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         plt.show()
@@ -184,18 +194,66 @@ class BarChartVisualiser(Visualiser):
         
         # if length of unique value is longer than 20 characters, add line breaks to the labels
 
-
+        title = None
         plt.figure(figsize=(12, 6))
         value_counts.plot(kind='barh')
         modifiers_str = ""
         for modifier in modifiers:
             modifiers_str += f"{modifier} "
-        plt.title(f'{column} with modifiers: {modifiers_str}')
+            if modifier[0] == 'title':
+                title = modifier[1]
+        
+        if title:
+            plt.title(title)
+        else:
+            plt.title(f'{column} with modifiers: {modifiers_str}') if modifiers else plt.title(f'{column} with modifiers: None')
+
         plt.xlabel('Count')
         plt.ylabel(column)
         plt.subplots_adjust(left=0.3) # Adjust left to accommodate long labels
         plt.show()
         logger.info("Bar chart plotted for column: %s", column)
+
+class line_chart_visualiser(Visualiser):
+    def plot_column(self, column, modifiers=[]):
+        """Plots a line chart for the specified column.
+        args:
+            column (str): The column to visualise.
+            modifiers (list): List of modifiers to adjust the line chart (e.g., ignore_largest, group_small).
+        """
+        if column not in self.data.columns:
+            logger.error("Column '%s' not found in data", column)
+            raise ValueError(f"Column '{column}' not found in data.")
+        
+        # Apply modifiers
+        if len(modifiers) > 0:
+            modified_series = self.apply_modifiers(column, modifiers)
+            value_counts = modified_series.value_counts().sort_index()
+        
+        else:
+            value_counts = self.data[column].value_counts().sort_index()
+        
+        title = None
+        plt.figure(figsize=(12, 6))
+        value_counts.plot(kind='line', marker='o')
+        modifiers_str = ""
+        for modifier in modifiers:
+            modifiers_str += f"{modifier} "
+            if modifier[0] == 'title':
+                title = modifier[1]
+        
+        if title:
+            plt.title(title)
+        else:
+            plt.title(f'{column} with modifiers: {modifiers_str}') if modifiers else plt.title(f'{column} with modifiers: None')
+
+        plt.xlabel(column)
+        #rotate x labels for better readability
+        plt.xticks(rotation=45)
+        plt.ylabel('Count')
+        plt.grid(True)
+        plt.show()
+        logger.info("Line chart plotted for column: %s", column)
 
 
 if __name__ == "__main__":
@@ -265,10 +323,19 @@ if __name__ == "__main__":
         return series.apply(simplify_ua)
 
     def get_browser_from_user_agent(series):
-        """Extracts browser name from user agent strings."""
+        """Extracts browser name from user agent strings.
+        removes check_http entries as we only want browser name"""
+
+        def remove_non_browser_ua(series):
+            indicators = ['check_http','-','python-requests', 'go-http-client', 'chrome privacy']
+            for indicator in indicators:
+                series = series[~series.str.lower().str.contains(indicator)]
+            return series
+            
+
         def extract_browser(ua):
             ua = str(ua).lower()
-            if 'bot' in ua or 'crawl' in ua or 'spider' in ua or 'bytedance' in ua:
+            if 'bot' in ua or 'crawl' in ua or 'spider' in ua or 'bytedance' in ua or 'googleother' in ua:
                 return 'Bot'
             if 'firefox' in ua:
                 return 'Firefox'
@@ -279,13 +346,24 @@ if __name__ == "__main__":
             elif 'opera' in ua or 'opr' in ua:
                 return 'Opera'
             elif 'chrome' in ua:
-                return 'Chrome'
+                #regex for only chrome browser, not chromium based browsers
+                #the pattern looks for chrome followed by a slash and version number, immediately followed by safari and version number
+                chrome_pattern = r'chrome\/[0-9]+.*safari\/[0-9]+'
+                if re.search(chrome_pattern, ua):
+                    #logger.debug(f"Extracted Chrome from user agent: {ua}")
+                    return 'Chrome'
+                else:
+                    logger.debug(f"Chromium based browser detected, categorizing as Other: {ua}")
+                    return 'Other'
+                
             else:
+                logger.debug(f"Browser could not be determined from user agent: {ua}")
                 return 'Other'
+        series = remove_non_browser_ua(series)
         return series.apply(extract_browser)
 
     def pie_chart_main():
-        columns_to_visualise = [['status', 'ignore_largest_2'], ['request_type', 'ignore_largest'], ['user_agent', ['modify_data',get_browser_from_user_agent],'group_small', 'ignore_largest']]
+        columns_to_visualise = [['status', 'group_small'],['status', 'ignore_largest_2'], ['request_type', 'ignore_largest'], ['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small']]
         visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
@@ -294,6 +372,34 @@ if __name__ == "__main__":
         visualiser = BarChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
+    def line_chart_main():
+        def convert_datetime(series):
+            #datetime is currently in format DD/MMM/YYYY:HH:MM:SS +ZZZZ
+            #we want to convert to pandas datetime and floor to the hour
+            pattern = r'(\d{2})/([A-Za-z]{3})/(\d{4}):(\d{2}):(\d{2}):(\d{2}) \+(\d{4})'
+            def parse_datetime(dt_str):
+                match = re.match(pattern, dt_str)
+                if match:
+                    day, month_str, year, hour, minute, second, tz = match.groups()
+                    month = pd.to_datetime(month_str, format='%b').month
+
+                    minute = int(minute) // 10 * 10  # Floor to nearest 10 minutes
+                    logger.debug(f"Parsed datetime string: {dt_str} to {year}-{month}-{day} {hour}:{minute}")
+                    return pd.Timestamp(year=int(year), month=month, day=int(day), hour=int(hour), minute=minute)
+                else:
+                    logger.warning(f"Date string did not match expected format: {dt_str}")
+                    return pd.NaT
+            return series.apply(parse_datetime).dt.floor('h')
+        
+        def floor_counts_above_threshold(series, threshold=10):
+            counts = series.value_counts()
+            to_floor = counts[counts > threshold].index
+            logger.debug(f"Flooring counts above threshold {threshold} for values: {to_floor.tolist()}")
+            return series.apply(lambda x: x if x not in to_floor else pd.NaT)
+
+        columns_to_visualise = [['datetime',['modify_data',convert_datetime]]]
+        visualiser = line_chart_visualiser(data_container.processed, columns_to_visualise)
+        visualiser.loop_over_columns()
     os.makedirs('SelfLogs/DataExplorationLogs', exist_ok=True)
     logging.basicConfig(filename='SelfLogs/DataExplorationLogs/data_visualiser.log', filemode='w', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logger.addHandler(logging.StreamHandler())# Add a stream handler to output logs to console
@@ -311,5 +417,6 @@ if __name__ == "__main__":
     data_container.process_data()
     logger.info("Data processed in DataVisualiser")
 
-    pie_chart_main()
+    #pie_chart_main()
     #bar_chart_main()
+    line_chart_main()
