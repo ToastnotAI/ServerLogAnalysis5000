@@ -67,13 +67,25 @@ class Visualiser:
         modified_data = self.data.copy()
         for modifier in modifiers:
             if modifier == "ignore_largest":
+                logger.debug("Applying modifier: ignore_largest to column: %s", column)
                 modified_data[column] = self.ignore_largest(modified_data[column])
             elif modifier == "ignore_largest_2":
+                logger.debug("Applying modifier: ignore_largest_2 to column: %s", column)
                 modified_data[column] = self.ignore_largest(self.ignore_largest(modified_data[column]))
             elif modifier == "group_small":
+                logger.debug("Applying modifier: group_small to column: %s", column)
                 modified_data[column] = self.group_small(modified_data[column])
             elif modifier == "group_smaller":
+                logger.debug("Applying modifier: group_smaller to column: %s", column)
                 modified_data[column] = self.group_smaller(modified_data[column])
+            elif modifier[0] == "modify_data":
+                logger.debug("Applying custom modifier to column: %s with function %s", column, str(modifier[1]))
+                try:
+                    func = modifier[1]
+                    modified_data[column] = func(modified_data[column])
+                except Exception as e:
+                    logger.error("Error applying custom modifier: %s", e)
+                    logger.warning("Skipping custom modifier due to error.")
             else:
                 logger.warning("Unknown modifier: %s", modifier)
         return modified_data[column]
@@ -132,7 +144,7 @@ class PieChartVisualiser(Visualiser):
 
         plt.figure(figsize=(10, 10))
         plt.pie(value_counts, labels=value_counts.index, autopct='%1.1f%%', startangle=140, pctdistance=0.85)
-        plt.title(f'{column} with modifiers: {", ".join(modifiers) if modifiers else "None"}')
+        plt.title(f'{column} with modifiers: {", ".join(str(modifiers)) if modifiers else "None"}')
         plt.legend(value_counts.index, loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
         plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         plt.show()
@@ -166,14 +178,19 @@ class BarChartVisualiser(Visualiser):
         
         else:
             value_counts = self.data[column].value_counts()
+        
+        # if length of unique value is longer than 20 characters, add line breaks to the labels
+
 
         plt.figure(figsize=(12, 6))
-        value_counts.plot(kind='bar')
-        plt.title(f'{column} with modifiers: {", ".join(modifiers) if modifiers else "None"}')
-        plt.xlabel(column)
-        plt.ylabel('Count')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
+        value_counts.plot(kind='barh')
+        modifiers_str = ""
+        for modifier in modifiers:
+            modifiers_str += f"{modifier} "
+        plt.title(f'{column} with modifiers: {modifiers_str}')
+        plt.xlabel('Count')
+        plt.ylabel(column)
+        plt.subplots_adjust(left=0.3) # Adjust left to accommodate long labels
         plt.show()
         logger.info("Bar chart plotted for column: %s", column)
 
@@ -182,13 +199,75 @@ if __name__ == "__main__":
     from sys import path
     import os
 
+    def modify_user_agent(series):
+        """Custom modifier to simplify user agent strings."""
+        def simplify_ua(ua):
+            new_ua = ""
+            ua = str(ua).lower()
+            if 'firefox' in ua:
+                new_ua += 'firefox'
+                logger.debug("Detected Firefox in user agent")
+            elif 'safari' in ua and 'chrome' not in ua:
+                new_ua += 'safari'
+                logger.debug("Detected Safari in user agent")
+            elif 'edge' in ua:
+                new_ua += 'edge'
+                logger.debug("Detected Edge in user agent")
+            elif 'opera' in ua or 'opr' in ua:
+                new_ua += 'opera'
+                logger.debug("Detected Opera in user agent")
+            elif 'gpt' in ua.lower():
+                logger.debug("Detected GPT in user agent")
+                new_ua += 'gpt-agent'
+            elif 'google' in ua:
+                new_ua += 'googlebot'
+                logger.debug("Detected Googlebot in user agent")
+            elif 'bing' in ua:
+                new_ua += 'bing'
+                logger.debug("Detected Bing in user agent")
+            elif 'ahref' in ua:
+                new_ua += 'ahref'
+                logger.debug("Detected Ahref in user agent")
+            elif 'mj12' in ua:
+                new_ua += 'majestic'
+                logger.debug("Detected Majestic in user agent")
+            elif 'semrush' in ua:
+                new_ua += 'semrush'
+                logger.debug("Detected Semrush in user agent")
+            elif 'bytedance' in ua or 'baiduspider' in ua:
+                new_ua += 'baidu bot'
+                logger.debug("Detected Baidu in user agent")
+            elif 'vivaldi' in ua:
+                new_ua += 'vivaldi'
+                logger.debug("Detected Vivaldi in user agent")
+            elif 'edg' in ua or 'edga' in ua:
+                new_ua += 'edge'
+                logger.debug("Detected Edge in user agent")
+            elif 'chrome' in ua and 'bot' not in ua:
+                new_ua += 'chrome'
+                logger.debug("Detected Chrome in user agent")
+                logger.debug(f"User agent checked: {ua}")
+            else:
+                logger.debug(f"User agent did not match any known categories")
+                if 'bot' in ua:
+                    logger.debug("Detected bot in user agent")
+                    ua = 'Miscellaneous bots'
+                return ua
+            
+            if 'bot' in ua:
+                logger.debug("Detected bot in user agent")
+                new_ua += ' bot'
+
+            return new_ua if new_ua else ua
+        return series.apply(simplify_ua)
+
     def pie_chart_main():
-        columns_to_visualise = [['status','group_small'], ['request_type', 'ignore_largest']]
+        columns_to_visualise = [['status', 'ignore_largest_2'], ['request_type', 'ignore_largest']]
         visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
     def bar_chart_main():
-        columns_to_visualise = [['referrer', 'ignore_largest_2'], ['user_agent','group_small'], ['ip','group_small']]
+        columns_to_visualise = [['referrer', 'ignore_largest_2'], ['user_agent',['modify_data',modify_user_agent],'group_smaller', 'ignore_largest'], ['ip','group_small']]
         visualiser = BarChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
