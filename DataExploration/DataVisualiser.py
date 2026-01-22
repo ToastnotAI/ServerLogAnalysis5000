@@ -144,7 +144,10 @@ class PieChartVisualiser(Visualiser):
 
         plt.figure(figsize=(10, 10))
         plt.pie(value_counts, labels=value_counts.index, autopct='%1.1f%%', startangle=140, pctdistance=0.85)
-        plt.title(f'{column} with modifiers: {", ".join(str(modifiers)) if modifiers else "None"}')
+        modifiers_str = ""
+        for modifier in modifiers:
+            modifiers_str += f"{modifier} "
+        plt.title(f'{column} with modifiers: {modifiers_str}') if modifiers else plt.title(f'{column} with modifiers: None')
         plt.legend(value_counts.index, loc='center left', bbox_to_anchor=(1, 0, 0.5, 1))
         plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
         plt.show()
@@ -261,8 +264,28 @@ if __name__ == "__main__":
             return new_ua if new_ua else ua
         return series.apply(simplify_ua)
 
+    def get_browser_from_user_agent(series):
+        """Extracts browser name from user agent strings."""
+        def extract_browser(ua):
+            ua = str(ua).lower()
+            if 'bot' in ua or 'crawl' in ua or 'spider' in ua or 'bytedance' in ua:
+                return 'Bot'
+            if 'firefox' in ua:
+                return 'Firefox'
+            elif 'safari' in ua and 'chrome' not in ua:
+                return 'Safari'
+            elif 'edge' in ua or 'edg' in ua or 'edga' in ua:
+                return 'Edge'
+            elif 'opera' in ua or 'opr' in ua:
+                return 'Opera'
+            elif 'chrome' in ua:
+                return 'Chrome'
+            else:
+                return 'Other'
+        return series.apply(extract_browser)
+
     def pie_chart_main():
-        columns_to_visualise = [['status', 'ignore_largest_2'], ['request_type', 'ignore_largest']]
+        columns_to_visualise = [['status', 'ignore_largest_2'], ['request_type', 'ignore_largest'], ['user_agent', ['modify_data',get_browser_from_user_agent],'group_small', 'ignore_largest']]
         visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
         visualiser.loop_over_columns()
 
@@ -288,5 +311,5 @@ if __name__ == "__main__":
     data_container.process_data()
     logger.info("Data processed in DataVisualiser")
 
-    #pie_chart_main()
-    bar_chart_main()
+    pie_chart_main()
+    #bar_chart_main()
