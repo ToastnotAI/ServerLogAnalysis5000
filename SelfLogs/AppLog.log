@@ -1,10 +1,38 @@
-2026-01-23 12:32:25,331 - INFO - Application started
-2026-01-23 12:32:25,331 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
-2026-01-23 12:32:25,339 - INFO - Data loaded successfully
-2026-01-23 12:32:25,339 - INFO - Initializing Visualiser
-2026-01-23 12:32:25,339 - INFO - Visualising column: user_agent
-2026-01-23 12:32:32,248 - INFO - Pie chart plotted for column: user_agent
-2026-01-23 12:32:32,248 - INFO - Visualising column: user_agent
-2026-01-23 12:32:33,598 - INFO - Pie chart plotted for column: user_agent
-2026-01-23 12:32:33,598 - INFO - Application finished successfully
+2026-01-23 12:42:16,436 - INFO - Application started
+2026-01-23 12:42:16,436 - INFO - Initializing DataContainer with file location: c:\Users\School\OneDrive - Truro and Penwith College\Documents\Assignments\Year 2\Humungous data\code\DataProcessing\..\AccessLogs\Processed\processed_apache_access_log.csv
+2026-01-23 12:42:16,446 - INFO - Data loaded successfully
+2026-01-23 12:42:16,446 - INFO - Initializing Visualiser
+2026-01-23 12:42:16,446 - INFO - Visualising column: user_agent
+2026-01-23 12:42:16,451 - INFO - Length of series after removing non-browser UAs: 1163
+2026-01-23 12:42:16,452 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:16,452 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:16,452 - INFO - Browser could not be determined from user agent: mozilla/5.0 (compatible; msie 8.0; windows nt 6.1; win64; x64 trident/4.0)
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: mozilla/5.0 (windows nt 6.1; wow64) applewebkit/534+ (khtml, like gecko) bingpreview/1.0b
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: mozilla/5.0 (windows nt 6.1; wow64) applewebkit/534+ (khtml, like gecko) bingpreview/1.0b
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: mozilla/5.0 (macintosh; intel mac os x 10_15_7) applewebkit/605.1.15 (khtml, like gecko)
+2026-01-23 12:42:16,453 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:18,359 - INFO - Pie chart plotted for column: user_agent
+2026-01-23 12:42:18,359 - INFO - Visualising column: user_agent
+2026-01-23 12:42:18,380 - INFO - Length of series after removing non-platform UAs: 775
+2026-01-23 12:42:18,381 - INFO - Platform could not be determined from user agent: 'safari/17618.3.11.11.7 cfnetwork/1335.5 darwin/21.6.0' Ignoring entry.
+2026-01-23 12:42:19,918 - INFO - Pie chart plotted for column: user_agent
+2026-01-23 12:42:19,918 - INFO - Visualising column: user_agent
+2026-01-23 12:42:19,924 - INFO - Length of series after removing non-browser UAs: 1163
+2026-01-23 12:42:19,924 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:19,924 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: mozilla/5.0 (compatible; msie 8.0; windows nt 6.1; win64; x64 trident/4.0)
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: linux mozilla
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: mozilla/5.0 (windows nt 6.1; wow64) applewebkit/534+ (khtml, like gecko) bingpreview/1.0b
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: mozilla/5.0 (windows nt 6.1; wow64) applewebkit/534+ (khtml, like gecko) bingpreview/1.0b
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: mozilla/5.0 (macintosh; intel mac os x 10_15_7) applewebkit/605.1.15 (khtml, like gecko)
+2026-01-23 12:42:19,926 - INFO - Browser could not be determined from user agent: mozilla/4.0 (compatible; msie 9.0; windows nt 6.1)
+2026-01-23 12:42:48,924 - INFO - Pie chart plotted for column: user_agent
+2026-01-23 12:42:48,925 - INFO - Application finished successfully
 

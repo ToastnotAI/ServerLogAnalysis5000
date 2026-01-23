@@ -44,6 +44,8 @@ def pie_chart_main(data_container):
             indicators = ['check_http','-','python-requests', 'go-http-client', 'chrome privacy']
             for indicator in indicators:
                 series = series[~series.str.lower().str.contains(indicator)]
+                logger.debug(f"Removing non-browser user agent containing indicator: {indicator}")
+            logger.info(f"Length of series after removing non-browser UAs: {len(series)}")
             return series
             
 
@@ -70,18 +72,20 @@ def pie_chart_main(data_container):
                     logger.debug(f"Chromium based browser detected, categorizing as Other: {ua}")
                     return 'Other'
             else:
-                logger.debug(f"Browser could not be determined from user agent: {ua}")
+                logger.info(f"Browser could not be determined from user agent: {ua}")
                 return 'Other'
         series = remove_non_browser_ua(series)
         return series.apply(extract_browser)
 
     def extract_platform_from_user_agent(series):
         """Extracts platform information from user agent strings."""
-        
-        def remove_non_browser_ua(series):
+
+        def remove_non_platform_ua(series):
             indicators = ['check_http','-','python-requests', 'go-http-client', 'chrome privacy'] + known_bots_indicators
             for indicator in indicators:
                 series = series[~series.str.lower().str.contains(indicator)]
+                logger.debug(f"Removing non-browser user agent containing indicator: {indicator}")
+            logger.info(f"Length of series after removing non-platform UAs: {len(series)}")
             return series
 
         def extract_platform(ua):
@@ -98,11 +102,14 @@ def pie_chart_main(data_container):
                 return 'iOS'
             elif 'cros' in ua:
                 return 'ChromeOS'
+            else:
+                logger.info(f"Platform could not be determined from user agent: '{ua}' Ignoring entry.")
+                
 
         
-        return remove_non_browser_ua(series).apply(extract_platform)
+        return remove_non_platform_ua(series).apply(extract_platform)
 
-    columns_to_visualise = [['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small'],['user_agent', ['title','Operating Systems'], ['modify_data',extract_platform_from_user_agent]]]
+    columns_to_visualise = [['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small'],['user_agent', ['title','Operating Systems'], ['modify_data',extract_platform_from_user_agent]],['user_agent', ['title', 'Browsers'], ['modify_data',get_browser_from_user_agent],'group_small', 'ignore_largest']]
     visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
     visualiser.loop_over_columns()
 
