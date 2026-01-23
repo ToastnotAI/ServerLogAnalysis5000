@@ -12,8 +12,16 @@ path = os.path.abspath(os.path.dirname(__file__))
 if not os.path.exists(os.path.join(path, 'SelfLogs')):
     os.makedirs(os.path.join(path, 'SelfLogs'))
 
-logging.basicConfig(filename = os.path.join(path, 'SelfLogs/AppLog.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename = os.path.join(path, 'SelfLogs/AppLog.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filemode='w')
 
+known_bots_indicators = [
+    'bot', 'crawl', 'spider', 'slurp',
+    'baidu', 'yandex', 'sogou', 'exabot',
+    'facebot', 'facebookexternalhit',
+    'ia_archiver', 'mj12bot', 'ahrefsbot',
+    'semrushbot', 'dotbot', 'gigabot',
+    'owler', 'trafilatura'
+]
 
 
 def loadData(check_existing = True):
@@ -41,7 +49,7 @@ def pie_chart_main(data_container):
 
         def extract_browser(ua):
             ua = str(ua).lower()
-            if 'bot' in ua or 'crawl' in ua or 'spider' in ua or 'bytedance' in ua or 'googleother' in ua:
+            if any(bot_indicator in ua for bot_indicator in known_bots_indicators):
                 return 'Bot'
             if 'firefox' in ua:
                 return 'Firefox'
@@ -61,16 +69,43 @@ def pie_chart_main(data_container):
                 else:
                     logger.debug(f"Chromium based browser detected, categorizing as Other: {ua}")
                     return 'Other'
-                
             else:
                 logger.debug(f"Browser could not be determined from user agent: {ua}")
                 return 'Other'
         series = remove_non_browser_ua(series)
         return series.apply(extract_browser)
 
-    columns_to_visualise = [['status', 'group_small'],['status', 'ignore_largest_2'], ['request_type'], ['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small', 'ignore_largest']]
+    def extract_platform_from_user_agent(series):
+        """Extracts platform information from user agent strings."""
+        
+        def remove_non_browser_ua(series):
+            indicators = ['check_http','-','python-requests', 'go-http-client', 'chrome privacy'] + known_bots_indicators
+            for indicator in indicators:
+                series = series[~series.str.lower().str.contains(indicator)]
+            return series
+
+        def extract_platform(ua):
+            ua = str(ua).lower()
+            if 'windows' in ua:
+                return 'Windows'
+            elif 'macintosh' in ua or 'mac os' in ua:
+                return 'MacOS'
+            elif 'linux' in ua and 'android' not in ua:
+                return 'Linux'
+            elif 'android' in ua:
+                return 'Android'
+            elif 'iphone' in ua or 'ipad' in ua or 'ios' in ua:
+                return 'iOS'
+            elif 'cros' in ua:
+                return 'ChromeOS'
+
+        
+        return remove_non_browser_ua(series).apply(extract_platform)
+
+    columns_to_visualise = [['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small'],['user_agent', ['title','Operating Systems'], ['modify_data',extract_platform_from_user_agent]]]
     visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
     visualiser.loop_over_columns()
+
 
 def bar_chart_main(data_container):
     def modify_user_agent(series):
