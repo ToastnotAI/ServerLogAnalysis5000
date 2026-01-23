@@ -14,8 +14,8 @@ class TestDataContainer(unittest.TestCase):
             '207.46.13.125 - - [06/Aug/2024:00:00:31 +0000] "GET /wallpaper/wallpaper.php?FILENAME=06-14-12(184120).png HTTP/2.0" 200 8383 "-" "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36"'
         ]
         with open(self.test_file, 'w') as f:
-            for _ in range(amount):
-                f.write('\n'.join(test_data) + '\n')
+            for i in range(amount):
+                f.write(test_data[i % len(test_data)] + '\n')
     
     def test_load_raw_data(self):
         """Test loading raw data from the log file."""
@@ -40,7 +40,7 @@ class TestDataContainer(unittest.TestCase):
         """Test processing one row of raw data into structured format."""
         self.insert_test_data(1)
         data_container = DataContainer(self.test_file)
-        data_container.process_data()
+        data_container.process_data(overwrite=True)
         self.assertIsNotNone(data_container.processed)
         self.assertIn('ip', data_container.processed.columns)
         self.assertIn('datetime', data_container.processed.columns)
@@ -50,4 +50,4 @@ class TestDataContainer(unittest.TestCase):
         self.assertIn('size', data_container.processed.columns)
         self.assertIn('referrer', data_container.processed.columns)
         self.assertIn('user_agent', data_container.processed.columns)
-        self.assertEqual(len(data_container.processed), 2)
+        self.assertEqual(len(data_container.processed), 1)

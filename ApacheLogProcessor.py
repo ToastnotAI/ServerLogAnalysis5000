@@ -1,11 +1,18 @@
 import logging
 import re
 import pandas as pd
+import os
 from DataProcessing.DataLoader import DataContainer
 from DataExploration.DataVisualiser import PieChartVisualiser, BarChartVisualiser, line_chart_visualiser
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename = 'SelfLogs/AppLog.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+#get absolute path of current directory
+path = os.path.abspath(os.path.dirname(__file__))
+
+if not os.path.exists(os.path.join(path, 'SelfLogs')):
+    os.makedirs(os.path.join(path, 'SelfLogs'))
+
+logging.basicConfig(filename = os.path.join(path, 'SelfLogs/AppLog.log'), level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 
@@ -61,7 +68,7 @@ def pie_chart_main(data_container):
         series = remove_non_browser_ua(series)
         return series.apply(extract_browser)
 
-    columns_to_visualise = [['status', 'group_small'],['status', 'ignore_largest_2'], ['request_type', 'ignore_largest'], ['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small']]
+    columns_to_visualise = [['status', 'group_small'],['status', 'ignore_largest_2'], ['request_type'], ['user_agent', ['title','Browsers and Bots'], ['modify_data',get_browser_from_user_agent],'group_small', 'ignore_largest']]
     visualiser = PieChartVisualiser(data_container.processed, columns_to_visualise)
     visualiser.loop_over_columns()
 
@@ -167,8 +174,8 @@ def main():
     logger.info("Data loaded successfully")
 
     pie_chart_main(data_container)
-    bar_chart_main(data_container)
-    line_chart_main(data_container)
+    #bar_chart_main(data_container)
+    #line_chart_main(data_container)
 
 logger.info("Application started")
 try:

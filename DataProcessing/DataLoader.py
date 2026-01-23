@@ -135,8 +135,13 @@ class DataContainer:
         logger.info("Processed data saved to %s", output_file)
         
 if __name__ == "__main__":
-    os.makedirs('SelfLogs/DataProcessingLogs', exist_ok=True)
-    logging.basicConfig(filename='SelfLogs/DataProcessingLogs/datacontainer.log', filemode='w', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+    # get absolute path of this file
+    path = os.path.abspath(__file__)
+    logPath =  os.path.join(os.path.dirname(path), '..', 'SelfLogs', 'DataProcessingLogs')
+    if not os.path.exists(logPath):
+        os.makedirs(logPath)
+        
+    logging.basicConfig(filename=os.path.join(logPath, 'datacontainer.log'), filemode='w', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
     logger.addHandler(logging.StreamHandler())# Add a stream handler to output logs to console
     logger.debug("Starting DataContainer module as main program")
     # set file location relative to this file
